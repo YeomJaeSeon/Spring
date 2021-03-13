@@ -5,6 +5,7 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 //되겠구나 하고 등록된다. 그다음 @Autowired가 있는 생성자가 호출되면 스프링컨테이너에 이미
 //등록되어있는 MemberService를 가져다가 연결을 한다.
 //@Service
+@Transactional // jpa를쓰려면 항상 @Transactional이 있어야함 , 데이터 저장하거나 그럴땐 항상 Transactional있어야함..
 public class MemberService {
     private final MemberRepository memberRepository;
 

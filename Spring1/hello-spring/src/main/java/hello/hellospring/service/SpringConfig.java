@@ -2,11 +2,14 @@ package hello.hellospring.service;
 
 import hello.hellospring.repository.JdbcMemberRepository;
 import hello.hellospring.repository.JdbcTemplateMemberRepository;
+import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 
 //Spring이 뜰때 이 @Configuration 어노테이션읽고
@@ -14,20 +17,15 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private DataSource dataSource;
+    @PersistenceContext // 이건있어도되고 없어도됨.
+   private EntityManager em;
 
-    @Autowired
-    public SpringConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+   @Autowired
+    public SpringConfig(EntityManager em) {
+        this.em = em;
     }
 
-    //    @Bean
-//    public MemberController memberController(){
-//        return new MemberController(memberService());
-//    }
     @Bean
-//    Bean을 내가 등록할거야 라는 의미이다.
-//    이 로직을 호출해서 Spring bean에등록해준다.
     public MemberService memberService(){
         return new MemberService(memberRepository());
 //        생성자 인자에 memberRepository를 넣어준다. - memberService에서 member
@@ -38,7 +36,7 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository(){
 //        return new MemoryMemberRepository();
-        return new JdbcTemplateMemberRepository(dataSource);
+        return new JpaMemberRepository(em);
     }
 }
 
