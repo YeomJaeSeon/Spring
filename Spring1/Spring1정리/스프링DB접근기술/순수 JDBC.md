@@ -8,6 +8,8 @@
 # 이번에 할건 Jdbc를 이용해서 자바에서 DB접근을 가능하게 해보자.
 
 - 막 이것저것 코드로 JdbcMemberRepository를 만듬..
+  ...
+
 - 구현체가 MemoryMemberRepository에서 JdbcMemberRepository로 변경되었다.
 - 우린 설정파일(스프링빈 등록하는 방법중 자바코드로 스프링빈 등록.)에서 다른 구현체(JdbcMemberRepository)를 스프링빈에 등록하면된다.
 - 이거만 하면 끝이다.
