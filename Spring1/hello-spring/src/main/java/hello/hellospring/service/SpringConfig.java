@@ -1,43 +1,37 @@
 package hello.hellospring.service;
 
-import hello.hellospring.repository.JdbcMemberRepository;
-import hello.hellospring.repository.JdbcTemplateMemberRepository;
 import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.sql.DataSource;
-
 //Spring이 뜰때 이 @Configuration 어노테이션읽고
 //이거는 Spring bean에 등록하란뜻이네? 라고 스프링이 인식을하고
 @Configuration
 public class SpringConfig {
 
-    @PersistenceContext // 이건있어도되고 없어도됨.
-   private EntityManager em;
+    private final MemberRepository memberRepository;
 
-   @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    @Autowired
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Bean
-    public MemberService memberService(){
-        return new MemberService(memberRepository());
+    public MemberService memberService() {
+        return new MemberService(memberRepository);
 //        생성자 인자에 memberRepository를 넣어준다. - memberService에서 member
 //        Repository 의존성 주입받으므로.
 //        이렇게되면 Spring 빈에등록되어잇는 memberRepository를 memberService에 넣어준다.
 //        @Autowired와같이 의존성 관계를 설정해줌(DI)
     }
-    @Bean
-    public MemberRepository memberRepository(){
-//        return new MemoryMemberRepository();
-        return new JpaMemberRepository(em);
-    }
+//    @Bean
+//    public MemberRepository memberRepository(){
+////        return new MemoryMemberRepository();
+////        return new JpaMemberRepository(em);
+//    }
+//}
 }
 
 // 어떤과정으로 스프링 빈에 등록되냐면
