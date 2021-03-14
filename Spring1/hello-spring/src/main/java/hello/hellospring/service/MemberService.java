@@ -36,13 +36,21 @@ public class MemberService {
      * 회원가입
      */
     public Long join(Member member){
-//        같은 이름이 있는 중복 회원X다는 룰을 만듬
+        long start = System.currentTimeMillis();
+        try{
+            //        같은 이름이 있는 중복 회원X다는 룰을 만듬
 //      아주 유용한 단축키 ctrl alt v 하면 리턴을 걍해줌.
-        validateDuplicateMember(member);
+            validateDuplicateMember(member);
 //        ctrl alt M으로 메서드 개간단하게 만들수있음
 
-        memberRepository.save(member);
-        return member.getId();
+            memberRepository.save(member);
+            return member.getId();
+        }finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join " + timeMs + "ms");
+        }
+
     }
 
 //    회원가입시 중복된 이름이 있으면 안됨.
@@ -59,7 +67,14 @@ public class MemberService {
 //    서비는 좀더 서비스스럽게 이름을 지음. 리포지터리보다 더 직관적이게, 이게 무슨 기능을
 //    의미하는지 바로 알수 있게
     public List<Member> findMembers(){
-        return memberRepository.findAll();
+        long start = System.currentTimeMillis();
+        try{
+            return memberRepository.findAll();
+        }finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("findMembers " + timeMs + "ms");
+        }
     }
     public Optional<Member> findOne(Long memberId){
         return memberRepository.findById(memberId);
