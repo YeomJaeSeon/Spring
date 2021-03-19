@@ -30,6 +30,7 @@ public class HelloServlet extends HttpServlet {
         // 위 contenttype이라던가 encoding type은 response헤더에 들어가는것이다.
         response.getWriter().write("hello " + username); // http response body에 데이터가 들어감.
 
+
         // 서블릿을 이용해서 이렇게 쉽게 요청이나 응답에대한 처리를 할수있음. 서블릿 없었으면
         // 이거다 파싱하면,, response 메시지 다 하나씩만들고 마이 복잡...
     }
