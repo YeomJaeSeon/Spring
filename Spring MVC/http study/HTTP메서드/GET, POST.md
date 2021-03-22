@@ -15,11 +15,11 @@
 # GET
 
 - 리소스 조회할때
-- 서버에 전달하고 싶은 데이터는 쿼리스트링을 통해서전달
+- 서버에 전달하고 싶은 데이터는 쿼리스트링을 통해서전달(사실 데이터를 전달하는게 아닌 target URI를 같이 전달하는것.)
 - 메시지 바디를 물론 사용할수있어 그런데 권장되지않아 . 왜냐면 GET메서드에 body에 데이터있는걸 지원하지않는 서버가 굉장히 많으므로 웬만하면 GET메서드 사용할때 바디에 뭐 넣지말기로 약속
 
 GET사용할때 http request message
-GET /search?q=hello HTTP/1.1 // start line
+GET /search?q=hello HTTP/1.1 // start line(= request line)
 Host: www.google.com // HTTP Header
 텅~
 body에는 데이터없이 http request메시지를 서버에게 보낸다.
