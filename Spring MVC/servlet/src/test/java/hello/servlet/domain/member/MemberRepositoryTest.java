@@ -38,7 +38,7 @@ public class MemberRepositoryTest {
 
         //when
         List<Member> result = memberRepository.findAll();
-        
+
         //then
         assertThat(result.size()).isEqualTo(2);
         //alt enter해서 static import 편하게
