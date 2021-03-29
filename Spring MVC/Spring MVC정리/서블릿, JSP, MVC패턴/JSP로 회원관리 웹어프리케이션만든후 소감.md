@@ -2,7 +2,7 @@
 
 - JSP사용하려면 일단 라이브러리 추가해야한다.
 
-- JSP도 서버 내부에서 servlet으로 변환되므로 httpservletRequest, httpServletResponse같은 객체를 예약어(키워드)로그냥 사용할수가 있다.ㄴ
+- JSP도 서버 내부에서 servlet으로 변환되므로 httpservletRequest, httpServletResponse같은 객체를 예약어(키워드)로그냥 사용할수가 있다.
 
 - 그러나 비즈니스로직 처리하는 JAVA코드랑 뷰담당하는 HTML이랑 한 파일에있따. 지금은 간단하지만 프로젝트가 커지면 이게 한계가 있다. 그래서 MVC패턴을 도입해보자.
 
