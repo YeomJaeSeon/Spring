@@ -41,8 +41,8 @@ public class FrontControllerServletV4 extends HttpServlet {
         Map<String, Object> model = new HashMap<>();
         // 모델을 프론트컨트롤러에서만들면
 
-        // 컨트롤러들(form, list save)에서 빙글빙글돌면서 model에 데이터가넣어짐짐
-       String viewName = controller.process(paramMap, model);
+        // 컨트롤러들(form, list save)에서 빙글빙글돌면서 model에 데이터가넣어짐
+        String viewName = controller.process(paramMap, model);
 
         MyView view = viewResolver(viewName);
 
