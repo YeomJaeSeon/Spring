@@ -11,15 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+// 컴포넌트 스캔방식으로 스프링빈 등록 - 스프링이 스플이빈으로 자동등록 직접등록해도됨 '@Bean'으로.
 @Controller
-@RequestMapping("/springmvc/v3/members")
+@RequestMapping("/springmvc/v3/members") // 클래스레벨에서의 매핑 - 메서들 레벨의 URL과 조합이됨.
 public class SpringMemberControllerV3 {
     MemberRepository memberRepository = MemberRepository.getInstance();
 
     // 애너테이션 기반의 컨트롤러는 V2처럼 ModelAndView를 반환해도되고~
     // 이렇게 문자열 String으로 리턴해도됨 그럼 알아서 viewname으로 인식함.
 //    @RequestMapping(value = "/new-form", method = RequestMethod.GET)
-    @GetMapping("/new-form")
+    @GetMapping("/new-form") // 클래스레벨의 @RequestMapping과 조합이됨. - HTTP 메서드 중 GET과 매핑해줌.
     public String newForm(){
         return "new-form";
     }
@@ -36,6 +37,7 @@ public class SpringMemberControllerV3 {
         Member member = new Member(username, age);
         memberRepository.save(member);
 
+        // 매개변수로 Model을 받아서 사용. 직접 ModelAndView를 반환하지않아도 되므로 너무 편해짐! - 실용적으로 컨트롤러를만듬.
         model.addAttribute("member", member);
 
         return "save-result";
