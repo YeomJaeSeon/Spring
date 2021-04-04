@@ -29,6 +29,7 @@ public class LogTestController {
         // 근데!!! 리소스를낭비하고있네 그래서 무조건 로그찍을때 +연산자사용하지말고 메서드호출로 해라.
 
         // 로그레벨 (기본이 info)임.
+
         log.trace("trace log={}", name);
         log.debug("debug log ={}", name);
         log.info("info log ={}", name);

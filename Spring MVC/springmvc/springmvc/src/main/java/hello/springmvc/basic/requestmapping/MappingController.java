@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MappingController {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
+     private static final Logger log = LoggerFactory.getLogger(MappingController.class);
 
     @RequestMapping(value = "/hello-basic", method = RequestMethod.GET)
     public String helloBasic(){
