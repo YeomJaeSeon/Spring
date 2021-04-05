@@ -3,10 +3,13 @@ package hello.springmvc.basic.request;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -20,5 +23,74 @@ public class RequestParamController {
         log.info("username = {}, age = {}", username, age);
 
         response.getWriter().write("ok");
+    }
+
+    // 위에 클래스레벨에서 @RestController로 뷰를 찾고 랜더링하는 방식으로 응답안하고
+    //바디에 데이터를콱 넣어서 응답하게끔할수있는데 그냥 이렇게
+    //메서드 레벨에서 @ResponseBody 애너테이션을 사용해도 위기능을한다.
+    @ResponseBody
+    @RequestMapping("/request-param-v2")
+    public String requestParamV2(
+            @RequestParam("username") String memberName,
+            @RequestParam("age") int memberAge
+    ){
+        log.info("username ={}, age = {}", memberName, memberAge);
+
+        // 컨트롤러에서 String을 반환하면 기본적으로 @Controller면 뷰를 찾고 렌더링한다.
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-v3")
+    public String requestParamV3(
+            @RequestParam String username, // ("username")생략
+            @RequestParam int age
+    ){
+        log.info("username ={}, age = {}", username, age);
+
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-v4")
+    public String requestParamV4(String username, int age){
+        log.info("username ={}, age = {}", username, age);
+
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-required")
+    public String requestParamRequired(
+            @RequestParam(required = true) String username, //required=true : 기본값
+            @RequestParam(required = false) Integer age){
+
+        log.info("username ={}, age = {}", username, age);
+
+        return "ok";
+    }
+
+    // defaultValue있으면 사실상 required는 필요가없음.
+    @ResponseBody
+    @RequestMapping("/request-param-default")
+    public String requestParamDefault(
+            @RequestParam(required = true, defaultValue = "guest") String username, //required=true : 기본값
+            @RequestParam(required = false, defaultValue = "-1") int age){
+
+        log.info("username ={}, age = {}", username, age);
+
+        return "ok";
+    }
+
+    // Map으로 그냥 key value로 받을수있음 간단하게.
+    @ResponseBody
+    @RequestMapping("/request-param-map")
+    public String requestParamMap(
+            @RequestParam Map<String, Object> paramMap
+            ){
+
+        log.info("username ={}, age = {}", paramMap.get("username"), paramMap.get("age"));
+
+        return "ok";
     }
 }
