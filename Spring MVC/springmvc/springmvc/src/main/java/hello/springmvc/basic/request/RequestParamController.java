@@ -1,7 +1,9 @@
 package hello.springmvc.basic.request;
 
+import hello.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -90,6 +92,44 @@ public class RequestParamController {
             ){
 
         log.info("username ={}, age = {}", paramMap.get("username"), paramMap.get("age"));
+
+        return "ok";
+    }
+
+    // 요청파라미터에 대해서 실제개발에선 이렇게 객체로 변환해준다.
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(
+            @RequestParam String username,
+            @RequestParam int age
+    ){
+        HelloData helloData = new HelloData();
+        helloData.setUsername(username);
+        helloData.setAge(age);
+
+        log.info("data ={}", helloData);
+        log.info("username ={}, age = {}", helloData.getUsername(), helloData.getAge());
+
+
+        return "ok";
+    }
+
+    // 이렇게 한번에 객체로 딱받을수있다. 이거 미쳤따리.
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(@ModelAttribute HelloData helloData){
+        log.info("data ={}", helloData);
+        log.info("username ={}, age = {}", helloData.getUsername(), helloData.getAge());
+
+        return "ok";
+    }
+
+    // @ModelAttribute 생략할슁ㅆ음. @RequestParam생략한거처럼.
+    @ResponseBody
+    @RequestMapping("/model-attribute-v3")
+    public String modelAttributeV3(HelloData helloData){
+        log.info("data ={}", helloData);
+        log.info("username ={}, age = {}", helloData.getUsername(), helloData.getAge());
 
         return "ok";
     }
