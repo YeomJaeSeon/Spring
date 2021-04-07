@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<h1 th:text="${board.boardId}"></h1>
+
+<a href="/board">홈으로</a>
+<br>
+<label>제목 : <input th:value="${board.boardId}" type="text" name="boardId" style="outline:none;cursor:default;" readonly/></label><br>
+<p>글 내용 :</p>
+<textarea readonly th:text="${board.description}" name="description" style="width:300px;height:300px;resize:none;margin-left:50px;outline:none;cursor:default;" ></textarea>
+<br>
+<button th:onclick="|location.href='@{/board/change/{boardId}(boardId=${board.id})}'|">글 수정</button>
+
+</body>
+</html>

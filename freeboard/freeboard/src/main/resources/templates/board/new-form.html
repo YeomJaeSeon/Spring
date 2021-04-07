@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<h1>자유 게시판</h1>
+<a href="/board">홈으로</a>
+<form action="/board/new-form" method="post">
+    <label>제목 : <input type="text" name="boardId"/></label><br>
+    <p>글 내용 :</p>
+    <textarea name="description" style="width:300px;height:300px;resize:none;margin-left:50px;" ></textarea>
+    <br>
+    <input type="submit" value="글 작성" />
+</form>
+<ul>
+
+</ul>
+</body>
+</html>
