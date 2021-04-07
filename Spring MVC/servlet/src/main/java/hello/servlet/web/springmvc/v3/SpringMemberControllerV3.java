@@ -5,10 +5,6 @@ import hello.servlet.domain.member.MemberRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 // 컴포넌트 스캔방식으로 스프링빈 등록 - 스프링이 스플이빈으로 자동등록 직접등록해도됨 '@Bean'으로.
