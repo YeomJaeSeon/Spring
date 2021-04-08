@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -36,8 +38,8 @@ public class MemberService {
         return saveMember;
     }
 
-    // 로그인
-    public boolean login(Member member){
+    // 로그인 체크
+    public boolean loginCheck(Member member){
         List<Member> savedMembers = memberRepository.findAll();
         for (Member savedMember : savedMembers) {
             if(member.getUserId().equals(savedMember.getUserId()))
@@ -45,5 +47,25 @@ public class MemberService {
                 return true; //로그인성공
         }
         return false; // 로그인 실패
+    }
+
+    // 로그인
+    public void login(HttpServletRequest request, Member member){
+        HttpSession session = request.getSession();
+        session.setAttribute("login", member.getUserId());
+        Object login = session.getAttribute("login");
+        log.info("session={}", login);
+    }
+
+    //로그아웃
+    public void logout(HttpServletRequest request, String userId){
+        HttpSession session = request.getSession();
+        Object loginUserId = session.getAttribute("login");
+        log.info("탈퇴={}", loginUserId.equals(userId));
+        if(loginUserId.equals(userId)){
+            session.removeAttribute("login");
+            Object logoutCheck = request.getSession().getAttribute("login");
+            log.info("로그아웃됏나 체크 ={}", logoutCheck);
+        }
     }
 }

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Slf4j
 @Controller
 public class MemberController {
@@ -28,7 +31,12 @@ public class MemberController {
      * 2. 회원가입 post 요청 처리
      */
     @GetMapping("/signup")
-    public String responseSignUpPage(Model model){
+    public String responseSignUpPage(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        Object loginSession = session.getAttribute("login");
+        if(loginSession != null){
+            return "redirect:/boards";
+        }
         model.addAttribute("signup", "signup");
         return "member/signup";
     }
@@ -63,22 +71,39 @@ public class MemberController {
      */
 
     @GetMapping("/login")
-    public String responseLoginPage(){
+    public String responseLoginPage(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Object loginSession = session.getAttribute("login");
+        if(loginSession != null){
+            return "redirect:/boards";
+        }
         return "member/login";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute Member member, Model model){
+    public String login(@ModelAttribute Member member, Model model, HttpServletRequest request){
         log.info("username={}, pwd={}", member.getUserId(), member.getPwd());
         if(member.getUserId() == "" || member.getPwd() == "") {
             model.addAttribute("error", "아이디나 비밀번호 입력해주세요.");
             return "member/login";
         }
-        if(!memberService.login(member)) {
+        if(!memberService.loginCheck(member)) {
             model.addAttribute("error", "없는 회원이거나 아이디나 비번이 틀렸습니다.");
             return "member/login";
         }
-        else
-            return "redirect:/board";
+        else {
+            memberService.login(request, member);
+            return "redirect:/boards"; //로그인성공
+        }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, @RequestParam String user){
+        memberService.logout(request, user);
+        HttpSession session = request.getSession();
+        Object login = session.getAttribute("login");
+        log.info("로그아웃할 login={}", login);
+
+        return "redirect:/login";
     }
 }

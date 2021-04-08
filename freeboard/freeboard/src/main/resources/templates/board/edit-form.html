@@ -8,16 +8,16 @@
 </head>
 <body>
 <h1>글 수정</h1>
-<a href="/board">홈으로</a>
-<form th:action="@{/board/change/{boardId}(boardId=${board.id})}" method="post">
+<a href="/boards">홈으로</a>
+<form th:action="@{/boards/{boardId}/edit(boardId=${board.id})}" method="post">
     <label>제목 : <input type="text" name="boardId" th:value="${board.boardId}"/></label><br>
     <p>글 내용 :</p>
     <textarea name="description" th:text="${board.description}" style="width:300px;height:300px;resize:none;margin-left:50px;" ></textarea>
     <br>
-    <input type="submit" value="글 수정" />
+    <input type="submit" value="수정 완료" />
 </form>
-<ul>
+<br>
+<button th:onclick="|location.href='@{/logout(user=${user})}'|">로그아웃</button>
 
-</ul>
 </body>
 </html>

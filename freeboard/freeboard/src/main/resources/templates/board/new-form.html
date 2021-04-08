@@ -8,16 +8,17 @@
 </head>
 <body>
 <h1>자유 게시판</h1>
-<a href="/board">홈으로</a>
-<form action="/board/new-form" method="post">
+<a href="/boards">홈으로</a>
+<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+<form action="/boards/new-form" method="post">
     <label>제목 : <input type="text" name="boardId"/></label><br>
     <p>글 내용 :</p>
     <textarea name="description" style="width:300px;height:300px;resize:none;margin-left:50px;" ></textarea>
     <br>
     <input type="submit" value="글 작성" />
 </form>
-<ul>
+<br>
+<button th:onclick="|location.href='@{/logout(user=${user})}'|">로그아웃</button>
 
-</ul>
 </body>
 </html>
