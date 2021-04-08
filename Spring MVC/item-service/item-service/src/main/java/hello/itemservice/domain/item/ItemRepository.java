@@ -9,7 +9,9 @@ import java.util.Map;
 
 @Repository
 public class ItemRepository {
-    private static final Map<Long, Item> store = new HashMap<>();
+    // 싱글톤이라 동시에접근하면 값이 꼬일수있으므로 ConCurrenyHashMap<>()이런거 쓰는게낫다.
+    private static final Map<Long, Item> store = new HashMap<>(); // key는 Long
+    // 비즈니스 도메인객체 Id도 Long맞춘거임.
     private static Long sequence = 0L;
 
     public Item save(Item item){
@@ -36,7 +38,4 @@ public class ItemRepository {
     public void clearStore(){
         store.clear();
     }
-
-
-
 }

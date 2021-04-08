@@ -20,10 +20,8 @@ public class ItemRepositoryTest {
     void save(){
         //given
         Item item = new Item("jpa book", 1000, 200);
-
         //when
         itemRepository.save(item);
-
         //then
         Item findItem = itemRepository.findById(item.getId());
         assertThat(findItem).isEqualTo(item);
@@ -41,7 +39,7 @@ public class ItemRepositoryTest {
 
         //then
         assertThat(items.size()).isEqualTo(2);
-        assertThat(items).contains(item1, item1);
+        assertThat(items).contains(item1, item2);
     }
 
     @Test
