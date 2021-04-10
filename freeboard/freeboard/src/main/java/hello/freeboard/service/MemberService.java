@@ -53,6 +53,7 @@ public class MemberService {
     public void login(HttpServletRequest request, Member member){
         HttpSession session = request.getSession();
         session.setAttribute("login", member.getUserId());
+        session.setMaxInactiveInterval(10);
         Object login = session.getAttribute("login");
         log.info("session={}", login);
     }

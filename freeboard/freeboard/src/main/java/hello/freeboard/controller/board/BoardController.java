@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,10 +34,11 @@ public class BoardController {
      * board/change - 게시판 수정 요청 POST 요청후 board페이지로 리다이렉트 (PRG)
      */
     @GetMapping
-    public String responseBoardPage(HttpServletRequest request, Model model){
+    public String boards(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes){
         HttpSession session = request.getSession();
         Object loginSession = session.getAttribute("login");
         if(loginSession == null){
+            redirectAttributes.addAttribute("status", false);
             return "redirect:/login";
         }
         model.addAttribute("boards", boardService.findAllBoards());
@@ -45,7 +47,7 @@ public class BoardController {
     }
 
     @GetMapping("/new-form")
-    public String responseBoardNewFormPage(HttpServletRequest request, Model model){
+    public String addForm(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
         Object loginSession = session.getAttribute("login");
         if(loginSession == null){
@@ -57,7 +59,7 @@ public class BoardController {
     }
 
     @PostMapping("/new-form")
-    public String createBoardAndResponseBoardPage(@ModelAttribute Board board, Model model){
+    public String add(@ModelAttribute Board board, Model model){
         if(board.getBoardId() == ""){
             model.addAttribute("error", "제목이 비었습니다.");
             return "board/new-form";
@@ -67,7 +69,7 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public String responseSelectedBoard(HttpServletRequest request, @PathVariable Long boardId, Model model){
+    public String board(HttpServletRequest request, @PathVariable Long boardId, Model model){
         HttpSession session = request.getSession();
         Object loginSession = session.getAttribute("login");
         if(loginSession == null){
@@ -81,11 +83,9 @@ public class BoardController {
 
         return "board/board";
     }
-
-    @PostMapping("/{boardId}")
-    public String requestDeleteBoard(@PathVariable String boardId){
-        Long longBoardId = Long.parseLong(boardId);
-        boardService.removeBoard(longBoardId);
+    @GetMapping("/{boardId}/delete")
+    public String delete(@PathVariable Long boardId){
+        boardService.removeBoard(boardId);
 
         return "redirect:/boards";
     }
@@ -103,6 +103,7 @@ public class BoardController {
         model.addAttribute("user", loginSession);
         return "board/edit-form";
     }
+
     @PostMapping("/{boardId}/edit")
     public String boardChangeRequest(@ModelAttribute Board board, @PathVariable Long boardId){
         boardService.updateBoard(board, boardId);
