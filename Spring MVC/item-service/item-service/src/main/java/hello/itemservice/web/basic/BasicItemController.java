@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -109,10 +110,30 @@ public class BasicItemController {
         itemRepository.save(item);
         return "basic/item";
     }
-    @PostMapping("/add")
+
+    // basic/item의 뷰템플릿을 웹브라우저로 내려줬따.
+    // 웹브라우저에서 새로고침을 하면? 웹브라우저는 이전에 했던 행동을 그대로 서버에게요청한다.
+    // POST /add 와 item데이터를 전달하고 다시 이 컨트롤러가 받아서 아이템을 저장하고 다시 뷰템플릿을내려준다.
+//    @PostMapping("/add")
     public String addItemV4(Item item){ // @ModelAttribute자체도 생략할수있음.
         itemRepository.save(item);
         return "basic/item";
+    }
+
+    // 웹브라우저에서 새로고침하면 POST로 요청하는것대신 서버에서 redicrect로 GET 페이지를 내려줘서
+    // 웹브라우저의 최신 동작인 GET을 동작하게끔 변경해보자.
+//    @PostMapping("/add")
+    public String addItemV5(Item item){ // @ModelAttribute자체도 생략할수있음.
+        itemRepository.save(item);
+        return "redirect:/basic/items/" + item.getId();
+    }
+
+    @PostMapping("/add")
+    public String addItemV6(Item item, RedirectAttributes redirectAttributes){ // @ModelAttribute자체도 생략할수있음.
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true); // 저장 되었다는 flag
+        return "redirect:/basic/items/{itemId}"; // 여기 못들어가는애들은 쿼리파라미터로들어가게됨.
     }
 
 
@@ -127,9 +148,8 @@ public class BasicItemController {
 
     // 상품 수정 POST요청
     @PostMapping("/{itemId}/edit")
-    public String editItem(@ModelAttribute Item item){
-        itemRepository.update(item.getId(), item);
-        return "redirect:/basic/items/" + item.getId();
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item){
+        itemRepository.update(itemId, item);
+        return "redirect:/basic/items/{itemId}"; // @PathVariable에서 받은 itemId를 그대로 쓸수잇음.
     }
-
 }
