@@ -8,7 +8,8 @@ import hello.core.member.MemberServiceImpl;
 // junit안쓰고 테스트하는거임.
 public class MemberApp {
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl(); // 다형성
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
         Member memberA = new Member(1L, "memberA", Grade.BASIC);
         memberService.join(memberA);
 
