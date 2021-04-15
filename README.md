@@ -8,7 +8,7 @@
 
 # Spring Core
 
-<a href="">보러가기<a href="https://github.com/YeomJaeSeon/Spring/tree/master/Spring%20Core">보러가기</a>
+<a href="https://github.com/YeomJaeSeon/Spring/tree/master/Spring%20Core">보러가기</a>
 
 # Spring MVC
 
