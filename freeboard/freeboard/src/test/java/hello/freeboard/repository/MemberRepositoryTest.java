@@ -9,7 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 public class MemberRepositoryTest {
-    MemberRepository memberRepository = new MemberRepository();
+    MemberRepositoryImpl memberRepository = new MemberRepositoryImpl();
 
     @AfterEach
     void afterEach(){

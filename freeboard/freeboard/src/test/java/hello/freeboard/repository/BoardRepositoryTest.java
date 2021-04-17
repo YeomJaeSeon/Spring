@@ -2,7 +2,6 @@ package hello.freeboard.repository;
 
 
 import hello.freeboard.domain.Board;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 public class BoardRepositoryTest {
-    BoardRepository boardRepository = new BoardRepository();
+    BoardRepositoryImpl boardRepository = new BoardRepositoryImpl();
 
     @AfterEach
     void afterEach(){

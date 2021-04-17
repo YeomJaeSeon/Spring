@@ -2,6 +2,7 @@ package hello.freeboard.controller.board;
 
 import hello.freeboard.domain.Board;
 import hello.freeboard.service.BoardService;
+import hello.freeboard.service.BoardServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/boards")
 public class BoardController {
 
+    // 역할에 만의존 구현체는 뭐가올지 생성자주입으로 어떤 녀석이올지 실행 후에야 알게됨. (BoardService는 인터페이스임.)
     private final BoardService boardService;
 
     @Autowired
