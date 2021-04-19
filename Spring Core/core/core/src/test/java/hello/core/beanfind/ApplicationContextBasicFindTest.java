@@ -28,7 +28,7 @@ public class ApplicationContextBasicFindTest {
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
     }
 
-    // 좋은 코드는 아님. 구체화에 의존하고있으므로.
+    // 좋은 코드는 아님. 구체화에 의존하고있으므로. - 추상화에 의존해서 빈가져오는게 더 적절함. 추상화에 의존해야 변경에 유리한 유연한 코드설계가가능한건 객체지향공부하는사람은 당연히알아야할것.
     @Test
     @DisplayName("구체 타입으로 빈 조회")
     void findBeanByName2(){
