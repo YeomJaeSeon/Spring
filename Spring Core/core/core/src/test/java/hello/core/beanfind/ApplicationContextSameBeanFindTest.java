@@ -45,8 +45,10 @@ public class ApplicationContextSameBeanFindTest {
         assertThat(beans.size()).isEqualTo(3);
     }
 
+    // 스프링 컨테이너 설정 클래스(자바설정클래스, XML도가능..) - 이 설정정보를 보고 스프링 빈이등록되고 스프링빈간의 의존관계도 설정된다.
     @Configuration
     static class SameBeanConfig {
+        // 이 메서드의 이름이 스프링 빈의 이름(key)이고 호출되어 반환되는 값이 스프링 빈의 value이다.
         @Bean
         public MemberRepository memberRepository1() {
             return new MemoryMemberRepository();
