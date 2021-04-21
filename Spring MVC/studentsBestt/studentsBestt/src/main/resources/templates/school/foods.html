@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"
+          rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>음식 목록</h2>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-end"
+                    onclick="location.href='addForm.html'"
+                    th:onclick="|location.href='@{/school/foods/ranking}'|"
+                    type="button">음식 랭킹</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary float-end"
+                    onclick="location.href='addForm.html'"
+                    th:onclick="|location.href='@{/school/foods/add}'|"
+                    type="button">새 음식
+                등록</button>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr> <th>ID</th>
+                <th>음식이름</th>
+                <th>좋아요</th>
+                <th>싫어요</th>
+                <th>삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="food : ${foods}">
+                <td><a href="item.html" th:href="@{/school/foods/{foodId}(foodId=${food.id})}" th:text="${food.id}">1</a></td>
+                <td><a href="item.html" th:href="@{|/school/foods/${food.id}|}" th:text="${food.foodName}">테스트 상품1</a></td>
+                <td th:text="${food.likesNum}" style="cursor:pointer;color:blue;" th:onclick="|location.href='@{/school/foods/{foodId}/like(foodId=${food.id})}'|">10000</td>
+                <td th:text="${food.hatesNum}" style="cursor:pointer;color:red;" th:onclick="|location.href='@{/school/foods/{foodId}/hate(foodId=${food.id})}'|">10</td>
+                <td style="cursor:pointer;" th:onclick="|location.href='@{/school/foods/{foodId}/delete(foodId=${food.id})}'|">삭제</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

@@ -38,7 +38,7 @@ public class ApplicationContextSameBeanFindTest {
     void findAllBeanByType(){
         // 빈 조회할때의 타입혹은 자식 타입의 빈을 모두 조회한다. (MemberRepository.class)타입으로 조회하면 MemberRepository거나 MemoryMemberRepository타입의 빈 조회. 근데 MemoryRepository는 인터페이스임.
         Map<String, MemoryMemberRepository> beans = ac.getBeansOfType(MemoryMemberRepository.class);
-        for (String key : beans.keySet()) {
+        for (String key : beans.keySet()) { // keySet은 Map의 key들을조회..!
             System.out.println("key = " + key + " value = " + beans.get(key));
         }
         System.out.println("beans = " + beans);

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head><body>
+<h1>등록</h1>
+<ul>
+    <li th:text="${id}">아이디</li>
+    <li th:text="${age}">나이</li>
+    <button th:onclick="|location.href='@{/study/list}'|">회원목록 보러가기</button>
+</ul>
+</body>
+</html>
