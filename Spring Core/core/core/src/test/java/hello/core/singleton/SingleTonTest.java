@@ -5,6 +5,8 @@ import hello.core.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -41,5 +43,23 @@ public class SingleTonTest {
         assertThat(singleTonService1).isSameAs(singleTonService2);
         //same : == - 참조비교
         //equal : == equals 메서드로 비교하는거임.(Object클래스의 equals메서드)
+    }
+
+    @Test
+    @DisplayName("스프링 컨테이너와 싱글톤")
+    void springContainer(){
+//        AppConfig appConfig = new AppConfig();
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+        MemberService memberService2 = ac.getBean("memberService", MemberService.class);
+
+        System.out.println("memberService1 = " + memberService1);
+        System.out.println("memberService2 = " + memberService2);
+        // 당연히 다른게 생성이된다.. JVM에 계속 객체가 생성이되서 올라감. 정확힌 Memory Heap
+
+        //memberService1 != memberService2
+        assertThat(memberService1).isSameAs(memberService2);
+        // same : == (참조주소비교)
+        // isEqualTo : eqauls(equals메서드 오버라이뒹)
     }
 }
