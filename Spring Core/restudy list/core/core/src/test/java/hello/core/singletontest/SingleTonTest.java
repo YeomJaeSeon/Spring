@@ -44,8 +44,8 @@ public class SingleTonTest {
 
         // 스프링 컨테이너는 싱글톤 컨테이너이다. 싱글톤 컨테이너에 등록되어있는 스프링 빈들은 싱글톤 객체로 존재함. 이를 공유하면서 사용
         // 이로써 싱글톤 패턴의 문제 해결과 하나의 객체를 공유하며 사용하는 장점 두마리 토끼둘다 갖게됨
-        // 스프링 컨테이너는 싱글턴 컨테이너 역할을 함으로써 스프링빈을 하나의 객체만 유지할수있다
+        // 스프링 컨테이너는 싱글턴 컨테이너 역할을 함으로써 스프링빈을 하나의 객체만 유지할수있다다
 
-        assertThat(memberService).isSameAs(memberService1);
+       assertThat(memberService).isSameAs(memberService1);
     }
 }

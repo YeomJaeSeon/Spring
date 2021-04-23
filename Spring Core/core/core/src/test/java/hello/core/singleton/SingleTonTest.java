@@ -55,7 +55,6 @@ public class SingleTonTest {
 
         System.out.println("memberService1 = " + memberService1);
         System.out.println("memberService2 = " + memberService2);
-        // 당연히 다른게 생성이된다.. JVM에 계속 객체가 생성이되서 올라감. 정확힌 Memory Heap
 
         //memberService1 != memberService2
         assertThat(memberService1).isSameAs(memberService2);
