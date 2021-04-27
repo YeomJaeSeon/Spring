@@ -6,7 +6,10 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component // 컴포넌트 스캔 대상이됨. 자동으로 스프링빈으로 등록
 public class OrderServiceImpl implements OrderService{
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -20,6 +23,8 @@ public class OrderServiceImpl implements OrderService{
     // 클라이언트코드는 의존 관계를 외부에서 주입받음(AppConfig - 공연기획자로부터)
     // 이제 이 클라이언트코드는 DIP OCP를 지키고 관심사분리로 오로지 실행에만 집중가능
     // 구현체가 뭘오는지 아애모르게됨.
+
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
@@ -33,5 +38,11 @@ public class OrderServiceImpl implements OrderService{
         int discount = discountPolicy.discount(member, itemPrice);
 
         return new Order(id, itemName, itemPrice, discount);
+    }
+
+    //테스트를 위한 코드
+
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
     }
 }

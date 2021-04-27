@@ -1,10 +1,15 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberServiceImpl implements MemberService{
     private MemberRepository memberRepository;
     //인터페이스 다형성으로 MemberServiceImpl은 역할인 인터페이스만 의존하고있다. 이는 역할과 구현으로 분리하여 구현을 쉽게 변경할수있는 유연한 코드로 설계한ㄱ더ㅏ
     //애초에 요구사항중 저장소가 바뀔슁ㅆ다는 요구사항이있었음..
 
+    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -17,5 +22,11 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Member findName(Long id) {
         return memberRepository.findById(id);
+    }
+
+    //테스트를 위한 코드
+
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
     }
 }
