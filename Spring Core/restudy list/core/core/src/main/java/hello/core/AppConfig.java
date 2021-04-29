@@ -34,6 +34,7 @@ public class AppConfig {
         System.out.println("call AppConfig.orderService");
         // 생성자로 구현체를 전달하는중 - 클라이언트코드의 생성자 주입을 위해서
         return new OrderServiceImpl(memberRepository(), discountPolicy());
+//        return null;
     }
 
     @Bean
