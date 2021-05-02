@@ -11,6 +11,9 @@ public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>();
 
+    public MemoryMemberRepository(){
+        System.out.println("MemoryMemberRepository 스프링 빈 등록");
+    }
     @Override
     public void save(Member member) {
         store.put(member.getId(), member);

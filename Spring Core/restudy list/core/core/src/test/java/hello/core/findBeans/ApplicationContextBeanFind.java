@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ApplicationContextBeanFind {
 
-    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class); // 설정 파일로넘긴 자바 클래스도 스프링 빈으로 등록이됨. @Configuration썼으니 스프링 빈 이름이 @CGLIB~
 
     @Test
     void findAllBeans(){

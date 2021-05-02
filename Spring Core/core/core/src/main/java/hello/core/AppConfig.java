@@ -35,7 +35,6 @@ public class AppConfig {
     public OrderService orderService(){
         System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy()); //스프링 빈
-//        return null;
     }
 
     @Bean
