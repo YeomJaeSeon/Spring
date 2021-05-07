@@ -19,7 +19,8 @@ public class AllBeanTest {
 
     @Test
     void findAllBean(){
-        ApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class, DiscountService.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class, DiscountService.class); // DiscountService는
+        // 스프링 빈으로 등록이된다.
         DiscountService discountService = ac.getBean(DiscountService.class);
         Member member = new Member(1L, "userA", Grade.VIP);
         int discountPrice = discountService.discount(member, 10000, "fixDiscountPolicy");
@@ -35,6 +36,7 @@ public class AllBeanTest {
         private final Map<String, DiscountPolicy> policyMap;
         private final List<DiscountPolicy> policies;
 
+        // 생성자에서 의존관계 주입시. DiscountPolicy에 맞는 녀석들이 전부 policyMap과 policies List에 들어온다. - 스프링의 특수기능
         @Autowired // 생략가능
         public DiscountService(Map<String, DiscountPolicy> policyMap, List<DiscountPolicy> policies) {
             this.policyMap = policyMap;
@@ -43,6 +45,7 @@ public class AllBeanTest {
             System.out.println("policies = " + policies);
         }
 
+        // 구현체 하나도 의존않하네. 죽인다.
         public int discount(Member member, int price, String discountCode) {
             DiscountPolicy discountPolicy = policyMap.get(discountCode);
 

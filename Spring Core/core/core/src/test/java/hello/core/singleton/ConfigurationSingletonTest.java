@@ -16,6 +16,8 @@ public class ConfigurationSingletonTest {
     void configurationTest(){
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
+        AppConfig appConfig = ac.getBean("appConfig", AppConfig.class);
+        System.out.println("appConfig = " + appConfig.getClass()); // 스프링 커넽이너 생성될떄 파라미터도 스프링빈으로 똮똭뜽록됨
         MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class);
         OrderServiceImpl orderService = ac.getBean("orderService", OrderServiceImpl.class);
         MemberRepository memberRepository = ac.getBean("memberRepository", MemberRepository.class);
