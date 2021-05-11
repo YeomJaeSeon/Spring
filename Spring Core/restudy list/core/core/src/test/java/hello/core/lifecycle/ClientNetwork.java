@@ -3,7 +3,7 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class ClientNetwork implements DisposableBean, InitializingBean {
+public class ClientNetwork {
     String url;
 
     public void setUrl(String url) {
@@ -23,14 +23,12 @@ public class ClientNetwork implements DisposableBean, InitializingBean {
         System.out.println("disconnect() : " + url);
     }
 
-    @Override
-    public void destroy() throws Exception {
+    public void close(){
         disconnect();
     }
 
     // 스프링 컨테이너 생성-> 빈등록 -> 스프링빈의존관계 주입 완료되면 호출됨 - 초기화 콜백 메서드임
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    public void init(){
         connect();
         call("초기화 시작");
     }

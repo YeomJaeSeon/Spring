@@ -20,7 +20,7 @@ public class BeanLifetCycleTest {
     @Configuration
     static class LifecycleBean{
         // 스프링 빈 등록될대 이메서드 호출이됨.. 그러므로
-        @Bean
+        @Bean(initMethod = "init")
         public ClientNetwork clientNetwork(){
             ClientNetwork clientNetwork = new ClientNetwork();
             clientNetwork.setUrl("www.jaeseon.dev");
