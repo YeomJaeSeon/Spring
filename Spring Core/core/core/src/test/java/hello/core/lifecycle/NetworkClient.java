@@ -1,5 +1,9 @@
 package hello.core.lifecycle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+// spring에 종속되어있는 애너테이션이아니다~ javax다.
+
 public class NetworkClient{
 
     private String url;
@@ -34,6 +38,7 @@ public class NetworkClient{
 
     // 의존관계 주입이 끝나면 이 메시드 호출한다. - 초기화콜백 기능 -
 
+    @PostConstruct
     public void init() {
         System.out.println("NetworkClient.init");
         connect();
@@ -41,6 +46,7 @@ public class NetworkClient{
     }
 
     // 소멸전 콜백
+    @PreDestroy
     public void close() {
         System.out.println("NetworkClient.close");
         disconnect();
