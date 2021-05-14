@@ -26,6 +26,10 @@ public class PrototypeTest {
         ac.close();
     }
 
+    // 프로토타입 스코프 빈은 스프링빈 간의의존관계 주입까지만 스프링 컨테이너가 관리한다.(초기화콜백도 포함)
+    // 즉, 스프링빈의 생명범위가 스프링빈간의 의존관계 주입 까지이다.
+    // 프토토타입 스코프 인 스프링빈같은 경우는 스프링빈을 조회할때만 스프링빈이 등록된다. 즉 클라이언트마다 다다른 스프링빈을 가지게된다. - 싱글톤 스프링빈 X!
+
     @Scope("prototype")
     static class PrototypeBean{
         @PostConstruct
