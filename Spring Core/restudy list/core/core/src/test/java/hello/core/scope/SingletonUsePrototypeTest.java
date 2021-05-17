@@ -3,6 +3,8 @@ package hello.core.scope;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -10,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -56,21 +59,19 @@ public class SingletonUsePrototypeTest {
 
     static class SingletonClass{
         @Autowired
-        private ApplicationContext applicationContext;
-
-        // 생성자주입으로 의존관계주임 생성자하나이므로 @Autowired생략가능 그런데 쓰겠다
-//        @Autowired
-//        public SingletonClass(Prototype prototype){
-//            this.prototype = prototype;
-//        }
+        private Provider<Prototype> objectProvider;
 
         public int logic(){
-            Prototype prototypeBean = applicationContext.getBean(Prototype.class);
+            Prototype prototypeBean = objectProvider.get(); // 스프링 컨테이너에서 필요한 스프링빈을 직접 찾아서 의존관계주입한다. (외부에서 의존관계 주입해주는 DI와는다르다)
+            // 이를 DL이라한다.
             prototypeBean.addCount();
             return prototypeBean.getCount();
         }
 
     }
+    // 싱글턴 스코프 빈에서 프로토타입 빈 사용할때 - 의존관계 완료된 새로운 객체가 필요할때 - 프로토타입빈을 사용하는데 DL을 통해 사용한다.
+    // Dependency Lookup이란 스프링 컨테이너에서 의존관계를 직접 주입하는 행위를 의미한다.
+    // Dependency LookUp는 스프링이 제공하는 인터페이스인 ObjectProvider과 Provider를 사용한다.
 
 // 프로토타입 빈 - 초기화콜백까지 스프링컨테이너가관리 그이후는 클라이언트코드에 책임던짐 , 클라이언트는 조회할떄마다 새로운 빈을 받음
     @Scope("prototype")

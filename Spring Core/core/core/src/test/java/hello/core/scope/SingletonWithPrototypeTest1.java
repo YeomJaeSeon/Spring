@@ -1,15 +1,16 @@
 package hello.core.scope;
 
 import lombok.RequiredArgsConstructor;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -37,20 +38,23 @@ public class SingletonWithPrototypeTest1 {
 
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(2); // 1이아니고 2네?
+        assertThat(count2).isEqualTo(1);
+
 
     }
 
     @Scope("singleton")
-    @RequiredArgsConstructor // 생성자주입으로 의존관계 주입받는다.
+    @RequiredArgsConstructor
     static class ClientBean{
-        private final PrototypeBean prototypeBean; // 생성시점에 주입이되어버림(프로토타입 빈을 주입받음)
 
-//        @Autowired // 스프링컨테이너에있는 스프링빈을 가져와 의존관계주입.
-//        private ApplicationContext applicationContext;  참고로 요건 의존관계 주입하는게아니라 스프링 관리하는 컨테이너에 대해서 스프링빈을 찾게해주는 것이다. 그냥 요렇게 하는방법이있다정도면된다.
+        @Autowired
+        private Provider<PrototypeBean> prototypeBeanProvider;
+        // ObjectProvider는 더 많은 기능을 제공하는 인터풰이스 (ObjectFactory 자식인터페이스)
+        // Provider는 스프링에 의존적이지않음!
 
         public int logic(){
-//            PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class); // 로직호출할떄 프로토타입 빈을 조회하므로 새로운 빈을 계속해서 생성
+            PrototypeBean prototypeBean = prototypeBeanProvider.get(); // getObject()메서드호출하면 스프링 컨테이너에서 프로토타입빈 찾아서반환해줌
+            // DL서비스 제공 - 스프링컨테이너에서 스프링빈 찾아서 자신이 의존관계 직접 주입(외부에서 의존관게 주입받는 DI와는 다르다)
             prototypeBean.addCount();
             int count = prototypeBean.count;
             return count;
