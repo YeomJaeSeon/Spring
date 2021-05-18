@@ -14,3 +14,6 @@
 
 - 단순히 스프링MVC를배우는게아닌 스프링 없이 MVC 어플을 만들어본다. -> MVC의 구조를 이해.
 - 만들어 보고 스프링 MVC의 기본기능을 사용해보자.
+
+김영한 팀장님의 스프링 MVC강의
+<a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1/dashboard">https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1/dashboard</a>

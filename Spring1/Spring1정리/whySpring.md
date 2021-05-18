@@ -35,3 +35,6 @@ with 최신기술들을 사용하면서.
 - 전반적인 스프링의 그림을 이해
 - 필요한 기술들이 왜사용되는지 어케 사용되는지 이정도만 이해
 - 이를 토대로 다음 학습에 더 집중적으로 공부
+
+김영한 팀장님의 스프링 입문강의
+<a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9E%85%EB%AC%B8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8/dashboard">https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9E%85%EB%AC%B8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8/dashboard</a>
