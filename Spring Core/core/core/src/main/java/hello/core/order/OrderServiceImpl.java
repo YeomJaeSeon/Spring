@@ -10,6 +10,7 @@ import hello.core.member.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component // 스프링 빈의 이름은 클래스의 맨앞글자 소문자로 -> orderServiceImpl로 스프링빈이 등록된다. value는 이클래스의 객체. 즉, 스프링빈으로 등록할때 OrderServiceImpl클래스의 객체를 생성해서 value로, key는 이 클래스의 맨앞글자 소문자로 해서 가지고있다.
