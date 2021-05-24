@@ -38,7 +38,7 @@ class D implements I{
 
 public class Test {
     public static void main(String[] args) {
-        A a = new A(new D()); // 4
+        A a = new A(new B()); // 4
         a.method();
     }
 }

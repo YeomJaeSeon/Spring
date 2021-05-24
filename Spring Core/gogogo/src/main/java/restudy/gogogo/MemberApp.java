@@ -3,11 +3,12 @@ package restudy.gogogo;
 import restudy.gogogo.domain.Grade;
 import restudy.gogogo.domain.Member;
 import restudy.gogogo.service.MemberService;
-import restudy.gogogo.serviceImpl.MemberServiceImpl;
 
 public class MemberApp {
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+
         Member memberA = new Member(1L, "memberA", Grade.VIP);
         memberService.join(memberA);
 
