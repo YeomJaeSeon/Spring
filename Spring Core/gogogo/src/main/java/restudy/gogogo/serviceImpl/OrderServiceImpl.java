@@ -3,7 +3,6 @@ package restudy.gogogo.serviceImpl;
 import restudy.gogogo.domain.Member;
 import restudy.gogogo.domain.Order;
 import restudy.gogogo.repository.MemberRepository;
-import restudy.gogogo.repositoryimpl.MemoryMemberRepository;
 import restudy.gogogo.service.DiscountPolicy;
 import restudy.gogogo.service.OrderService;
 
