@@ -1,9 +1,12 @@
 package restudy.gogogo.serviceImpl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import restudy.gogogo.domain.Member;
 import restudy.gogogo.repository.MemberRepository;
 import restudy.gogogo.service.MemberService;
 
+@Component
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 

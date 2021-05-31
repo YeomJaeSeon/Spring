@@ -1,11 +1,13 @@
 package restudy.gogogo.repositoryimpl;
 
+import org.springframework.stereotype.Component;
 import restudy.gogogo.domain.Member;
 import restudy.gogogo.repository.MemberRepository;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>();

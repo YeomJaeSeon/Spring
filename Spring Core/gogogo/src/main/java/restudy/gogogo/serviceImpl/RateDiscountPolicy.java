@@ -1,9 +1,12 @@
 package restudy.gogogo.serviceImpl;
 
+import org.springframework.stereotype.Component;
 import restudy.gogogo.domain.Grade;
 import restudy.gogogo.domain.Member;
 import restudy.gogogo.service.DiscountPolicy;
 
+
+@Component
 public class RateDiscountPolicy implements DiscountPolicy {
 
     private final int discountPercent = 10;
