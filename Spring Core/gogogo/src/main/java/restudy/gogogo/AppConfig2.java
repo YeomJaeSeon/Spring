@@ -15,7 +15,7 @@ public class AppConfig2 {
     private static final MemberRepository memberRepositoryInstance = new MemoryMemberRepository();
     private static final DiscountPolicy discountPolicyInstance = new RateDiscountPolicy();
     private static final MemberService memberInstance = new MemberServiceImpl(memberRepositoryInstance);
-    private static final OrderService orderInstance = new OrderServiceImpl(memberRepositoryInstance, discountPolicyInstance);
+//    private static final OrderService orderInstance = new OrderServiceImpl(memberRepositoryInstance, discountPolicyInstance);
     // 인스턴스 레벨의 멤버는 스태틱 레벨의 멤버 사용가능..
     // 반대는안됨 스태틹 레벨에서 인스턴스 레벨의 멤버는 사용불가. - 메모리에 클래스가 생성될때 static은 생성, 인스턴스는 객체생성될떄 iv, 등 생성되므로
 
@@ -23,9 +23,9 @@ public class AppConfig2 {
         return memberInstance;
     }
 
-    public static OrderService orderService(){
-        return orderInstance;
-    }
+//    public static OrderService orderService(){
+//        return orderInstance;
+//    }
 
     public static MemberRepository memberRepository(){
         return memberRepositoryInstance;
