@@ -57,6 +57,5 @@ public class OrderServiceTest {
 //        Order itemA = orderService.createOrder(1L, "itemA", 10000);
 //
 //        Assertions.assertThat(itemA.getDiscountPrice()).isEqualTo(1000);
-
     }
 }
