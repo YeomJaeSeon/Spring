@@ -64,4 +64,11 @@ public class RequestBodyStringController {
 
         return "ok";
     }
+
+    @ResponseBody
+    @PostMapping("/request-body-string-v44")
+    public String requestBodyStringV44(@RequestBody String data){
+        log.info("message body ={}", data);
+        return "ok";
+    }
 }

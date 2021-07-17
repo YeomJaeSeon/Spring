@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hello.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,5 +73,36 @@ public class RequestBodyJsonController {
     public HelloData requestBodyJsonV5(@RequestBody HelloData helloData) {
         log.info("username={}, age = {}", helloData.getUsername(), helloData.getAge());
         return helloData;
+    }
+
+    //==복습==//
+    @ResponseBody
+    @PostMapping("/request-body-json-vv3")
+    public String requsetBodyJsonvv3(@RequestBody HelloData data){
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+        return "ok";
+    }
+
+    @ResponseBody
+    @PostMapping("/request-body-json-vv4")
+    public String requestBodyJsonvv4(HttpEntity<HelloData> httpEntity){
+        HelloData data = httpEntity.getBody();
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+        return "ok";
+    }
+
+    @ResponseBody
+    @PostMapping("/request-body-json-vvv4")
+    public String requestBodyJsonvvv4(RequestEntity<HelloData> helloDataRequestEntity){
+        HelloData data = helloDataRequestEntity.getBody();
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+        return "ok";
+    }
+
+    @ResponseBody
+    @PostMapping("/request-body-json-vv5")
+    public HelloData requestBodyJsonvv5(@RequestBody HelloData data){
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+        return data;
     }
 }
