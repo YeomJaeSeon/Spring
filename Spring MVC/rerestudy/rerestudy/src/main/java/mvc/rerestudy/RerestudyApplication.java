@@ -11,5 +11,4 @@ public class RerestudyApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RerestudyApplication.class, args);
 	}
-
 }
